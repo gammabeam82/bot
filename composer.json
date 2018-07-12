@@ -1,0 +1,23 @@
+{
+  "name": "gammabeam82/bot",
+  "description": "Yet another useless telegram bot",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Paul Mastavy",
+      "email": "gammabeam82@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Gammabeam82\\Bot\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {}
+}
