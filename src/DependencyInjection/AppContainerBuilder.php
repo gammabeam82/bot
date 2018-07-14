@@ -11,23 +11,15 @@ use Symfony\Component\DependencyInjection\TaggedContainerInterface;
 class AppContainerBuilder
 {
     /**
-     * @var array
-     */
-    protected $config;
-
-    /**
      * @var TaggedContainerInterface
      */
     protected $container;
 
     /**
      * AppContainerBuilder constructor.
-     *
-     * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct()
     {
-        $this->config = $config;
         $this->container = new ContainerBuilder();
 
         $this->configure();
