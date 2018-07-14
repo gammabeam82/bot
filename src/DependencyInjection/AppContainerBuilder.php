@@ -2,11 +2,11 @@
 
 namespace Gammabeam82\Bot\DependencyInjection;
 
-use Gammabeam82\Bot\Message\MessagePartsLoader;
-use Gammabeam82\Bot\Message\MessageProvider;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\TaggedContainerInterface;
+
 
 class AppContainerBuilder
 {
@@ -43,14 +43,7 @@ class AppContainerBuilder
 
     private function configure(): void
     {
-        $this->container->setParameter('parts', $this->config['parts']);
-
-        $this->container
-            ->register('loader', MessagePartsLoader::class)
-            ->addArgument('%parts%');
-
-        $this->container
-            ->register('message_provider', MessageProvider::class)
-            ->addArgument(new Reference('loader'));
+        $loader = new YamlFileLoader($this->container, new FileLocator(sprintf("%s/../../config/", __DIR__)));
+        $loader->load('parameters.yaml');
     }
 }

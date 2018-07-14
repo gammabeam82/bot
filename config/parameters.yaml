@@ -1,1 +1,16 @@
-parts: resources/messages.yaml
+parameters:
+  parts: resources/messages.yaml
+
+services:
+  loader:
+    class: Gammabeam82\Bot\Message\MessagePartsLoader
+    arguments: ['%parts%']
+  message_provider:
+    class: Gammabeam82\Bot\Message\MessageProvider
+    arguments: ['@loader']
+  botman_telegram:
+    class: BotMan\BotMan\BotMan
+    factory: [Gammabeam82\Bot\Factory\BotmanTelegramFactory, create]
+  bot:
+    class: Gammabeam82\Bot\Bot
+    arguments: ['@botman_telegram', '@message_provider']

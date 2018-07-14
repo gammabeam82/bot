@@ -17,7 +17,7 @@ class MessageProviderTest extends TestCase
     public function setUp()
     {
         $config = Yaml::parseFile(sprintf("%s/../../config/parameters.yaml", __DIR__));
-        $loader = new MessagePartsLoader($config['parts']);
+        $loader = new MessagePartsLoader($config['parameters']['parts']);
 
         $this->provider = new MessageProvider($loader);
     }

@@ -29,7 +29,7 @@ class MessagePartsLoaderTest extends TestCase
 
     public function testGetMessageParts()
     {
-        $messages = ($loader = new MessagePartsLoader($this->config['parts']))->getMessageParts();
+        $messages = ($loader = new MessagePartsLoader($this->config['parameters']['parts']))->getMessageParts();
 
         $this->assertTrue(is_array($messages));
         $this->assertArrayHasKey('parts', $messages);
