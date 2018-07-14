@@ -22,7 +22,7 @@ class AppContainerBuilder
     {
         $this->container = new ContainerBuilder();
 
-        $this->configure();
+        $this->compileContainer();
     }
 
     /**
@@ -33,9 +33,11 @@ class AppContainerBuilder
         return $this->container;
     }
 
-    private function configure(): void
+    private function compileContainer(): void
     {
         $loader = new YamlFileLoader($this->container, new FileLocator(sprintf("%s/../../config/", __DIR__)));
         $loader->load('parameters.yaml');
+
+        $this->container->compile(true);
     }
 }
