@@ -2,17 +2,34 @@
 
 namespace Tests\Message;
 
+use Gammabeam82\Bot\Message\MessagePartsLoader;
 use Gammabeam82\Bot\Message\MessageProvider;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Yaml\Yaml;
 
 class MessageProviderTest extends TestCase
 {
-    protected $parts = ['parts' => [['a', 'b', 'c'], ['d', 'e', 'f']]];
+    /**
+     * @var MessageProvider
+     */
+    protected $provider;
+
+    public function setUp()
+    {
+        $config = Yaml::parseFile(sprintf("%s/../../config/parameters.yaml", __DIR__));
+        $loader = new MessagePartsLoader($config['parts']);
+
+        $this->provider = new MessageProvider($loader);
+    }
+
+    public function testGreeting()
+    {
+        $this->assertTrue(is_string($this->provider->greeting()));
+    }
 
     public function testGetReply()
     {
-        $provider = new MessageProvider($this->parts);
-
-        $this->assertTrue(is_string($provider->getReply(2)));
+        $this->assertTrue(is_string($this->provider->getReply()));
+        $this->assertEquals(3, substr_count($this->provider->getReply(3), "."));
     }
 }

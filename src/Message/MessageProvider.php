@@ -14,11 +14,11 @@ class MessageProvider implements MessageProviderInterface
     /**
      * MessageProvider constructor.
      *
-     * @param array $messages
+     * @param MessagePartsLoaderInterface $loader
      */
-    public function __construct(array $messages)
+    public function __construct(MessagePartsLoaderInterface $loader)
     {
-        $this->messages = $messages;
+        $this->messages = $loader->getMessageParts();
     }
 
     /**
@@ -34,6 +34,7 @@ class MessageProvider implements MessageProviderInterface
 
         $parts = array_map(function ($part) {
             shuffle($part);
+
             return $part;
         }, $this->messages['parts']);
 
