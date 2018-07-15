@@ -14,11 +14,11 @@ class MessageProvider implements MessageProviderInterface
     /**
      * MessageProvider constructor.
      *
-     * @param MessagePartsLoaderInterface $loader
+     * @param array $messages
      */
-    public function __construct(MessagePartsLoaderInterface $loader)
+    public function __construct(array $messages)
     {
-        $this->messages = $loader->getMessageParts();
+        $this->messages = $messages;
     }
 
     /**

@@ -2,18 +2,5 @@ parameters:
   parts: resources/messages.yaml
   telegram_token: '%env(TELEGRAM_TOKEN)%'
 
-services:
-  loader:
-    class: Gammabeam82\Bot\Message\MessagePartsLoader
-    arguments: ['%parts%']
-  message_provider:
-    class: Gammabeam82\Bot\Message\MessageProvider
-    arguments: ['@loader']
-  botman_telegram:
-    class: BotMan\BotMan\BotMan
-    factory: [Gammabeam82\Bot\Factory\BotmanTelegramFactory, create]
-    arguments: ['%telegram_token%']
-  bot:
-    public: true
-    class: Gammabeam82\Bot\Bot
-    arguments: ['@botman_telegram', '@message_provider']
+imports:
+    - { resource: services.yaml }

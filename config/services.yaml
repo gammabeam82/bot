@@ -1,0 +1,19 @@
+services:
+  loader:
+    class: Gammabeam82\Bot\Message\MessagePartsLoader
+    arguments: ['%parts%']
+
+  message_provider:
+    class: Gammabeam82\Bot\Message\MessageProvider
+    factory: [Gammabeam82\Bot\Factory\MessageProviderFactory, create]
+    arguments: ['@loader']
+
+  botman_telegram:
+    class: BotMan\BotMan\BotMan
+    factory: [Gammabeam82\Bot\Factory\BotmanTelegramFactory, create]
+    arguments: ['%telegram_token%']
+
+  bot:
+    public: true
+    class: Gammabeam82\Bot\Bot
+    arguments: ['@botman_telegram', '@message_provider']
