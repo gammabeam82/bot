@@ -12,8 +12,9 @@ if (false === isset($_SERVER['APP_ENV'])) {
 
 $request = Request::createFromGlobals();
 
-if(false !== $request->isMethod('GET')) {
-    return new RedirectResponse(sprintf("https://t.me/%s", getenv('BOTNAME')));
+if (false !== $request->isMethod('GET')) {
+    $response = new RedirectResponse(sprintf("https://t.me/%s", getenv('BOTNAME')));
+    $response->send();
 }
 
 $container = (new AppContainerBuilder())->getContainer();
