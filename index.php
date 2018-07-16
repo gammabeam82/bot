@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Gammabeam82\Bot\DependencyInjection\AppContainerBuilder;
+use Gammabeam82\Bot\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,7 +17,7 @@ if (false !== $request->isMethod('GET')) {
     $response->send();
 }
 
-$container = (new AppContainerBuilder())->getContainer();
+$container = ContainerBuilder::getContainer();
 
 $bot = $container->get('bot');
 $bot->run();
