@@ -41,17 +41,18 @@ class Bot
     public function run(): void
     {
         $messageProvider = $this->messageProvider;
+        $dispatcher = $this->dispatcher;
 
         $this->botman->hears('/start', function (BotMan $bot) use ($messageProvider) {
             $bot->reply($messageProvider->greeting());
         });
 
-        $this->botman->hears('([1-9])', function (BotMan $bot, int $number) use ($messageProvider) {
+        $this->botman->hears('([1-9])', function (BotMan $bot, int $number) use ($messageProvider, $dispatcher) {
             $bot->reply($messageProvider->getReply($number));
 
             if (false !== (bool)getenv('LOG')) {
                 $messageEvent = new MessageEvent($bot->getMessage(), $bot->getUser());
-                $this->dispatcher->dispatch($messageEvent);
+                $dispatcher->dispatch($messageEvent);
             }
         });
 
