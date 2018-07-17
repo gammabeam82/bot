@@ -39,7 +39,6 @@ class MessageSubscriber implements EventSubscriberInterface
      */
     public function onIncomingMessage(MessageEvent $event): void
     {
-        $user = $event->getUser();
 
         $this->logger->info('test 123');
     }
