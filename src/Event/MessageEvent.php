@@ -22,10 +22,11 @@ class MessageEvent extends Event
      * MessageEvent constructor.
      *
      * @param IncomingMessage $message
-     * @param UserInterface $user
+     * @param UserInterface|null $user
      */
-    public function __construct(IncomingMessage $message, UserInterface $user)
+    public function __construct(IncomingMessage $message, UserInterface $user = null)
     {
+        $this->message = $message;
         $this->user = $user;
     }
 
@@ -38,9 +39,9 @@ class MessageEvent extends Event
     }
 
     /**
-     * @return UserInterface
+     * @return UserInterface|null
      */
-    public function getUser(): UserInterface
+    public function getUser(): ?UserInterface
     {
         return $this->user;
     }

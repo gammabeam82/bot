@@ -39,7 +39,16 @@ class MessageSubscriber implements EventSubscriberInterface
      */
     public function onIncomingMessage(MessageEvent $event): void
     {
+        $user = $event->getUser();
 
-        $this->logger->info('test 123');
+        $data = sprintf(
+            "id: %s\nusername: %s\nfirst name: %s\nlast name: %s\n",
+            $user->getId(),
+            $user->getUsername(),
+            $user->getFirstName(),
+            $user->getLastName()
+        );
+
+        $this->logger->info($data);
     }
 }

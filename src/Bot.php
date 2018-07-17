@@ -3,6 +3,7 @@
 namespace Gammabeam82\Bot;
 
 use BotMan\BotMan\BotMan;
+use Gammabeam82\Bot\Event\Events;
 use Gammabeam82\Bot\Event\MessageEvent;
 use Gammabeam82\Bot\Message\MessageProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -52,7 +53,7 @@ class Bot
 
             if (false !== (bool)getenv('LOG')) {
                 $messageEvent = new MessageEvent($bot->getMessage(), $bot->getUser());
-                $dispatcher->dispatch($messageEvent);
+                $dispatcher->dispatch(Events::INCOMING_MESSAGE, $messageEvent);
             }
         });
 
