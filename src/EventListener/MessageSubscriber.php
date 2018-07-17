@@ -2,8 +2,8 @@
 
 namespace Gammabeam82\Bot\EventListener;
 
-use Gammabeam82\Bot\Event\MessageEvent;
 use Gammabeam82\Bot\Event\Events;
+use Gammabeam82\Bot\Event\MessageEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -41,6 +41,6 @@ class MessageSubscriber implements EventSubscriberInterface
     {
         $user = $event->getUser();
 
-        $this->logger->info($user->getUsername());
+        $this->logger->info('test 123');
     }
 }
