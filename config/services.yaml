@@ -1,4 +1,7 @@
 services:
+  event_dispatcher:
+    class: Symfony\Component\EventDispatcher\EventDispatcher
+
   loader:
     class: Gammabeam82\Bot\Message\MessagePartsLoader
     arguments: ['%parts%']
@@ -8,6 +11,10 @@ services:
     factory: [Gammabeam82\Bot\Factory\MessageProviderFactory, create]
     arguments: ['@loader']
 
+  logger:
+    class: Monolog\Logger
+    factory: [Gammabeam82\Bot\Factory\LoggerFactory, create]
+
   botman_telegram:
     class: BotMan\BotMan\BotMan
     factory: [Gammabeam82\Bot\Factory\BotmanTelegramFactory, create]
@@ -16,4 +23,10 @@ services:
   bot:
     public: true
     class: Gammabeam82\Bot\Bot
-    arguments: ['@botman_telegram', '@message_provider']
+    arguments: ['@botman_telegram', '@message_provider', '@event_dispatcher']
+
+  message_subscriber:
+    class: Gammabeam82\Bot\EventListener\MessageSubscriber
+    arguments: ['@logger']
+    tags:
+      - { name: kernel.event_subscriber }
