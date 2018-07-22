@@ -26,14 +26,12 @@ class ContainerBuilder
         }
 
         $container = new SymfonyContainerBuilder();
-
         $container->addCompilerPass(new RegisterListenersPass());
 
         $loader = new YamlFileLoader($container, new FileLocator(sprintf("%s/../../config/", __DIR__)));
         $loader->load('parameters.yaml');
 
         $container->compile(true);
-
         self::$container = $container;
 
         return $container;
